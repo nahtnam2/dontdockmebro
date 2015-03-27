@@ -5,7 +5,7 @@ curl -sSL https://rvm.io/mpapis.asc | gpg --import -;
 \curl -s -S -L https://get.rvm.io | bash -s stable;
 . ~/.rvm/scripts/rvm;
 rvm install 2.0.0;
-rvm use 2.0.0 ^▒default;
+rvm use 2.0.0 default;
 sudo git clone git://github.com/discourse/discourse.git /var/www/discourse;
 cd /var/www/discourse;
 gem install bundler;
