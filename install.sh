@@ -58,10 +58,9 @@ createdb discourse_prod
 RUBY_GC_MALLOC_LIMIT=90000000 RAILS_ENV=production bundle exec rake db:migrate
 RUBY_GC_MALLOC_LIMIT=90000000 RAILS_ENV=production bundle exec rake assets:precompile
 mkdir /var/www/discourse/tmp/pids
-
 EOF
-
 cd /var/www/discourse/config;
 cp unicorn_upstart.conf /etc/init/disc.conf;
 cp nginx.global.conf /etc/nginx/conf.d/local-server.conf;
+echo "Shutting Down to Finalize Installation";
 #sudo reboot;
