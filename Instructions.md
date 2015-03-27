@@ -1,6 +1,6 @@
 ###Requirements
--Fresh Ubuntu 14.04 Install
 #no sites or you'll fubar your instance#
+-Fresh Ubuntu 14.04 Install
 -1gb ram (2gb recommended)
 
 
