@@ -5,14 +5,11 @@ Discourse Forums is next generation tech, and has up to now required either seri
 
 Now you can get a working bleeding edge forum architecture without breaking the bank, or cracking open the IT books. I've done all the leg work, and installed Discourse in dozens of server environments. Now I bring to you an easy to follow scripting install to get your forums rocking without having to have an understanding of what's really going on to get it done. 
 
-###Requirements###
+###Requirements
 -Fresh Ubuntu 14.04 Install
 #no sites or you'll fubar your instance#
 -1gb ram (2gb recommended)
 
-OpenVZ~!~!~!
-Discourse~!~
-Installation
   
 1. Start the script with these commands. Copy paste the below:
 
@@ -31,7 +28,7 @@ cd /tmp; apt-get update; apt-get install git -y; git clone https://github.com/pl
 	- password
 	- email
 	
-###Please note the email is used to signup and confirm your acct, granting you admin privileges. This isn't the mandrill username acct, it should be a personal email you already use, like gmail, yahoo
+####Please note the email is used to signup and confirm your acct, granting you admin privileges. This isn't the mandrill username acct, it should be a personal email you already use, like gmail, yahoo
 	
 That's it! Your VPS will reboot soon, and the forums will be up and running 
 	Enjoy!  
