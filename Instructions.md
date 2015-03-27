@@ -17,10 +17,10 @@ cd /tmp; apt-get update; apt-get install git -y; git clone https://github.com/pl
 	Click, “get api key” and keep this tab open
 
 4 When instructed, reference the tab with mandrill info & enter the appropriate values followed by the enter key
-	- hostname
-	- username
-	- password
-	- email
+- hostname
+- username
+- password
+- email
 
 	
 ####Please note the email is used to signup and confirm your acct, granting you admin privileges. This isn't the mandrill username acct, it should be a personal email you already use, like gmail, yahoo
