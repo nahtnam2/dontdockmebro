@@ -1,5 +1,4 @@
 
-
 #!/bin/bash
 sudo ln -sf /proc/self/fd /dev/fd;
 curl -sSL https://rvm.io/mpapis.asc | gpg --import -;
@@ -34,6 +33,5 @@ createdb discourse_prod;
 RUBY_GC_MALLOC_LIMIT=90000000 RAILS_ENV=production bundle exec rake db:migrate;
 RUBY_GC_MALLOC_LIMIT=90000000 RAILS_ENV=production bundle exec rake assets:precompile;
 mkdir /var/www/discourse/tmp/pids;
-sudo initctl start disc;
 sudo reboot;
 
