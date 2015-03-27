@@ -5,18 +5,18 @@
 
 
   
-1. Start the script with these commands. Copy paste the below:
+1 Start the script with these commands. Copy paste the below:
 
 cd /tmp; apt-get update; apt-get install git -y; git clone https://github.com/pl3bs/dontdockmebro.git; cd dontdockmebro; chmod +x install.sh; ./install.sh
 
-2. Enter a unique password for the discourse user.
+2 Enter a unique password for the discourse user.
 	[ YOUR PASS ]
 
-3. Go to http://www.mandrillapp.com and signup for an acct.
+3 Go to http://www.mandrillapp.com and signup for an acct.
  	Log into your Dashboard, and click the “settings” tab on the left toolbar
 	Click, “get api key” and keep this tab open
 
-4. When instructed, reference the tab with mandrill info & enter the appropriate values followed by the enter key
+4 When instructed, reference the tab with mandrill info & enter the appropriate values followed by the enter key
 	- hostname
 	- username
 	- password
