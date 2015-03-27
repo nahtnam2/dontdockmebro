@@ -4,7 +4,7 @@ sed -i '3ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty-backports main rest
 sed -i '4ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty-security main restricted universe multiverse' /etc/apt/sources.list;
 apt-get update;
 apt-get upgrade -y;
-apt-get install nano fail2ban sudo postgresql-9.3 postgresql-contrib-9.3 build-essential libssl-dev libyaml-dev git libtool libxslt-dev libxml2-dev libpq-dev gawk -y ;
+apt-get install nano fail2ban curl sudo postgresql-9.3 postgresql-contrib-9.3 build-essential libssl-dev libyaml-dev git libtool libxslt-dev libxml2-dev libpq-dev gawk -y ;
 cd /etc/fail2ban;
 cp jail.conf jail.local;
 service fail2ban start;
@@ -21,7 +21,7 @@ EOF
 curl http://nginx.org/keys/nginx_signing.key | sudo apt-key add -;
 sudo apt-get update && sudo apt-get -y install nginx;
 cd /tmp;
-cp /dontdockmebro/disco.conf /etc/nginx/conf.d/disco.conf;
+cp disco.conf /etc/nginx/conf.d/disco.conf;
 sudo mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.disabled;
 mkdir /var/nginx;
 service nginx restart;
