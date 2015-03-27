@@ -10,7 +10,6 @@
 cd /tmp; apt-get update; apt-get install git -y; git clone https://github.com/pl3bs/dontdockmebro.git; cd dontdockmebro; chmod +x install.sh; ./install.sh
 
 2 Enter a unique password for the discourse user.
-	[ YOUR PASS ]
 
 3 Go to http://www.mandrillapp.com and signup for an acct.
  	Log into your Dashboard, and click the “settings” tab on the left toolbar
