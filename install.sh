@@ -10,7 +10,6 @@ cp jail.conf jail.local;
 service fail2ban start;
 sed -i '11i@reboot root bash /var/www/discourse/startup.sh' /etc/crontab;
 sed -i '/ALL=(ALL:ALL) ALL/adiscourse    ALL=(ALL:ALL) ALL' /etc/sudoers;
-git clone https://github.com/pl3bs/dontdockmebro.git;
 read -p "Enter a Password for the Discourse User " psss;
 yes "$psss" | sudo adduser --shell /bin/bash --gecos 'Discourse application' discourse;
 sudo install -d -m 755 -o discourse -g discourse /var/www/discourse;
