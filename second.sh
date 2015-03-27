@@ -15,7 +15,7 @@ sudo chown discourse:discourse discourse -R;
 cd discourse;
 bundle install --deployment --without test;
 cd /var/www/discourse/config;
-cp /tmp/dontdockmebro/startup.sh /var/www/discourse/startup.sh;
+cp /tmp/dontdockmebro/startup.sh /root/startup.sh;
 cp discourse_quickstart.conf discourse.conf;
 sed -i "/^smtp_address/ s/$/ smtp.mandrillapp.com /" discourse.conf;
 sed -i 's/25/587/g' discourse.conf;
