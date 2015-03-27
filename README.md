@@ -7,7 +7,7 @@ Now you can get a working bleeding edge forum architecture without breaking the 
 
 ###Requirements###
 -Fresh Ubuntu 14.04 Install
-#/no sites or you'll fubar your instance#/
+#no sites or you'll fubar your instance#
 -1gb ram (2gb recommended)
 
 OpenVZ~!~!~!
@@ -31,7 +31,7 @@ cd /tmp; apt-get update; apt-get install git -y; git clone https://github.com/pl
 	- password
 	- email
 	
-**Please note the email is used to signup and confirm your acct, granting you admin privileges. This isn't the mandrill username acct, it should be a personal email you already use, like gmail, yahoo...
+###Please note the email is used to signup and confirm your acct, granting you admin privileges. This isn't the mandrill username acct, it should be a personal email you already use, like gmail, yahoo
 	
 That's it! Your VPS will reboot soon, and the forums will be up and running 
 	Enjoy!  
