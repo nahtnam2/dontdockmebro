@@ -4,8 +4,8 @@ sed -i '3ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty-backports main rest
 sed -i '4ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty-security main restricted universe multiverse' /etc/apt/sources.list;
 apt-get update;
 apt-get upgrade -y;
-apt-get install nano fail2ban htop sudo postgresql-9.3 postgresql-contrib-9.3 build-essential libssl-dev libyaml-dev git libtool libxslt-dev libxml2-dev libpq-dev gawk$
-cd /etc/fail2ban -y;
+apt-get install nano fail2ban sudo postgresql-9.3 postgresql-contrib-9.3 build-essential libssl-dev libyaml-dev git libtool libxslt-dev libxml2-dev libpq-dev gawk -y ;
+cd /etc/fail2ban;
 cp jail.conf jail.local;
 service fail2ban start;
 sed -i '11i@reboot root bash /var/www/discourse/startup.sh' /etc/crontab;
