@@ -5,27 +5,32 @@ Discourse Forums is next generation tech, and has up to now required either seri
 
 Now you can get a working bleeding edge forum architecture without breaking the bank, or cracking open the IT books. I've done all the leg work, and installed Discourse in dozens of server environments. Now I bring to you an easy to follow scripting install to get your forums rocking without having to have an understanding of what's really going on to get it done. 
 
+###Requirements###
+-Fresh Ubuntu 14.04 Install                 #/#/#/#/#/no sites or you'll fubar your instance#/#/#/#/#/
+-1gb ram (2gb recommended)
+
 OpenVZ~!~!~!
 Discourse~!~
 Installation
   
-1. Get the files with this command:
-	git clone https://github.com/pl3bs/dontdockmebro.git
+1. Start the script with these commands. Copy paste the below:
 
-2. start the files with this command
-	chmod +x install.sh ; ./install.sh
+cd /tmp; apt-get update; apt-get install git -y; git clone https://github.com/pl3bs/dontdockmebro.git; cd dontdockmebro; chmod +x install.sh; ./install.sh
 
-3. Enter a unique password into the first terminal and press enter to finish the first script.
+2. Enter a unique password for the discourse user.
 	[ YOUR PASS ]
 
-4. Go to http://www.mandrillapp.com and signup for an acct.
+3. Go to http://www.mandrillapp.com and signup for an acct.
  	Log into your Dashboard, and click the “settings” tab on the left toolbar
 	Click, “get api key” and keep this tab open
 
-5. When instructed, reference the tab with mandrill info & enter the appropriate values followed by the enter key
+4. When instructed, reference the tab with mandrill info & enter the appropriate values followed by the enter key
+	- hostname
+	- username
+	- password
+	- email
+**Please note the email is used to signup and confirm your acct, granting you admin privileges. This isn't the mandrill username acct, it should be a personal email you already use, like gmail, yahoo...
 	
-
-	That's it! Your VPS will reboot soon, and the forums will be up and running 
+That's it! Your VPS will reboot soon, and the forums will be up and running 
 	Enjoy!  
-
 =D
