@@ -18,6 +18,7 @@ cd /var/www/discourse/config;
 cp /tmp/dontdockmebro/startup.sh /root/startup.sh;
 cp nginx-global.conf /etc/nginx/conf.d/local-server.conf;
 cp discourse_quickstart.conf discourse.conf;
+cp unicorn_upstart.conf /etc/init/disc.conf;
 sed -i "/^smtp_address/ s/$/ smtp.mandrillapp.com /" discourse.conf;
 sed -i 's/25/587/g' discourse.conf;
 read -p "Enter the name of your domain [ex: www.webeindustry.com] " domain;
