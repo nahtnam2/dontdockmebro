@@ -25,7 +25,7 @@ sudo mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.disabled;
 mkdir /var/nginx;
 service nginx restart;
 sudo -u postgres createuser -s discourse;
-su discourse <<'EOF'
+su discourse <<'ABC'
 sudo ln -sf /proc/self/fd /dev/fd
 curl -sSL https://rvm.io/mpapis.asc | gpg --import -
 \curl -s -S -L https://get.rvm.io | bash -s stable
@@ -57,7 +57,7 @@ createdb discourse_prod
 RUBY_GC_MALLOC_LIMIT=90000000 RAILS_ENV=production bundle exec rake db:migrate
 RUBY_GC_MALLOC_LIMIT=90000000 RAILS_ENV=production bundle exec rake assets:precompile
 mkdir /var/www/discourse/tmp/pids
-EOF
+ABC
 cd /var/www/discourse/config;
 cp unicorn_upstart.conf /etc/init/disc.conf;
 cp nginx.global.conf /etc/nginx/conf.d/local-server.conf;
