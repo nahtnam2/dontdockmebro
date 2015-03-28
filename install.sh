@@ -109,4 +109,4 @@ echo "Shutting Down to Finalize Installation";
 
 #reboot to clean up and auto-start
 
-#sudo reboot;
+sudo reboot;
