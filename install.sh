@@ -12,7 +12,7 @@ apt-get upgrade -y;
 
 #install dependencies
 
-apt-get install git nano fail2ban imagemagick redis-server curl sudo postgresql-9.3 postgresql-contrib-9.3 build-essential libssl-dev libyaml-dev git libtool libxslt-dev libxml2-dev libpq-dev gawk -y;
+apt-get install git ufw nano fail2ban imagemagick redis-server curl sudo postgresql-9.3 postgresql-contrib-9.3 build-essential libssl-dev libyaml-dev git libtool libxslt-dev libxml2-dev libpq-dev gawk -y;
 
 #configure fail2ban
 
@@ -22,6 +22,13 @@ cp jail.conf jail.local;
 #start fail2ban & redis
 
 service fail2ban start; service redis-server start;
+
+#configure ufw
+
+ufw allow http;
+ufw allow https;
+ufw allow ssh;
+ufw enable;
 
 #update crontab for discourse auto-start
 
