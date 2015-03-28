@@ -42,16 +42,17 @@ bundle install --deployment --without test
 cp /tmp/dontdockmebro/startup.sh /var/www/discourse/startup.sh
 cd /var/www/discourse/config
 cp discourse_quickstart.conf discourse.conf
-sed -i "/^smtp_address/ s/$/ smtp.mandrillapp.com /" discourse.conf
-sed -i 's/25/587/g' discourse.conf
-read -p "Enter the name of your domain [ex: www.webeindustry.com] " domain
-sed -i "s/"discourse.example.com"/$domain/g" discourse.conf
-read -p "Enter your MandrillApp Username [ex: admin@webeindustry.com] " uname
-sed -i "/^smtp_user_name/ s/$/ $uname/g" discourse.conf
-read -p "Enter your MandrillApp API Key [ex: ytCARGJVKfLJs3x6MQZqw] " API
-sed -i "/^smtp_password/ s/$/ $API/g" discourse.conf
-read -p "Enter the email address you use to register your account [ex: mail@webeindustry.com] " mail
-sed -i "/^developer_email/ s/$/ $mail/g" discourse.conf
+read -p "Please Configure discourse.conf File ";
+#sed -i "/^smtp_address/ s/$/ smtp.mandrillapp.com /" discourse.conf
+#sed -i 's/25/587/g' discourse.conf
+#read -p "Enter the name of your domain [ex: www.webeindustry.com] " domain
+#sed -i "s/"discourse.example.com"/$domain/g" discourse.conf
+#read -p "Enter your MandrillApp Username [ex: admin@webeindustry.com] " uname
+#sed -i "/^smtp_user_name/ s/$/ $uname/g" discourse.conf
+#read -p "Enter your MandrillApp API Key [ex: ytCARGJVKfLJs3x6MQZqw] " API
+#sed -i "/^smtp_password/ s/$/ $API/g" discourse.conf
+#read -p "Enter the email address you use to register your account [ex: mail@webeindustry.com] " mail
+#sed -i "/^developer_email/ s/$/ $mail/g" discourse.conf
 cd /var/www/discourse
 createdb discourse_prod
 RUBY_GC_MALLOC_LIMIT=90000000 RAILS_ENV=production bundle exec rake db:migrate
