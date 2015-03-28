@@ -9,5 +9,6 @@ Now you can get a working bleeding edge forum architecture without breaking the 
 
 #Requirements
 ###no sites or you'll fubar your instance#
--Fresh Ubuntu 14.04 Install
--1gb ram (2gb recommended)
+- Fresh Ubuntu 14.04 Install
+- 1gb ram (2gb recommended)
+- A-record Pointing to VPS
