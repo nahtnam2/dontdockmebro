@@ -28,7 +28,7 @@ service fail2ban start; service redis-server start;
 ufw allow http;
 ufw allow https;
 ufw allow ssh;
-ufw enable;
+y | ufw enable;
 
 #update crontab for discourse auto-start
 
