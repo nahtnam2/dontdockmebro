@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #Load closest mirrors
 
 sed -i '1ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty main restricted universe multiverse' /etc/apt/sources.list;
