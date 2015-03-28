@@ -1,18 +1,42 @@
+#Load closest mirrors
+
 sed -i '1ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty main restricted universe multiverse' /etc/apt/sources.list;
 sed -i '2ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty-updates main restricted universe multiverse' /etc/apt/sources.list;
 sed -i '3ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty-backports main restricted universe multiverse' /etc/apt/sources.list;
 sed -i '4ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty-security main restricted universe multiverse' /etc/apt/sources.list;
+
+#update and upgrade
+
 apt-get update;
 apt-get upgrade -y;
+
+#install dependencies
+
 apt-get install nano fail2ban redis-server curl sudo postgresql-9.3 postgresql-contrib-9.3 build-essential libssl-dev libyaml-dev git libtool libxslt-dev libxml2-dev libpq-dev gawk -y ;
+
+#configure fail2ban
+
 cd /etc/fail2ban;
 cp jail.conf jail.local;
+
+#start fail2ban & redis
+
 service fail2ban start; service redis-server start;
+
+#update crontab for discourse auto-start
+
 sed -i '11i@reboot root bash /var/www/discourse/startup.sh' /etc/crontab;
+
+#make discourse sudoer
+
 sed -i '/ALL=(ALL:ALL) ALL/adiscourse    ALL=(ALL:ALL) ALL' /etc/sudoers;
+
 read -p "Enter a Password for the Discourse User " psss;
 yes "$psss" | sudo adduser --shell /bin/bash --gecos 'Discourse application' discourse;
 sudo install -d -m 755 -o discourse -g discourse /var/www/discourse;
+
+#get latest nginx
+
 yes | sudo apt-get remove '^nginx.*$';
 cat << 'EOF' | sudo tee /etc/apt/sources.list.d/nginx.list
 deb http://nginx.org/packages/ubuntu/ trusty nginx
@@ -26,12 +50,18 @@ mkdir /var/nginx;
 service nginx restart;
 sudo -u postgres createuser -s discourse;
 su discourse <<'EOF'
+
+#install rvm
+
 sudo ln -sf /proc/self/fd /dev/fd
 curl -sSL https://rvm.io/mpapis.asc | gpg --import -
 \curl -s -S -L https://get.rvm.io | bash -s stable
 . ~/.rvm/scripts/rvm
 rvm install 2.0.0
 rvm use 2.0.0 default
+
+#install ruby and discourse
+
 sudo git clone git://github.com/discourse/discourse.git /var/www/discourse
 cd /var/www/discourse
 gem install bundler
@@ -54,6 +84,9 @@ sed -i "/^smtp_password/ s/$/ $API/g" discourse.conf;
 read -p "Enter the email address you use to register your account [ex: mail@webeindustry.com] " mail;
 sed -i "/^developer_email/ s/$/ $mail/g" discourse.conf;
 su discourse <<'EOF'
+
+#init data
+
 cd /var/www/discourse
 createdb discourse_prod
 RUBY_GC_MALLOC_LIMIT=90000000 RAILS_ENV=production bundle exec rake db:migrate
@@ -64,4 +97,7 @@ cd /var/www/discourse/config;
 cp unicorn_upstart.conf /etc/init/disc.conf;
 cp nginx.global.conf /etc/nginx/conf.d/local-server.conf;
 echo "Shutting Down to Finalize Installation";
+
+#reboot to clean up and auto-start
+
 #sudo reboot;
