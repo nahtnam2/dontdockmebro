@@ -25,7 +25,7 @@ sudo mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.disabled;
 mkdir /var/nginx;
 service nginx restart;
 sudo -u postgres createuser -s discourse;
-su discourse <<'ABC'
+su discourse <<'EOF'
 sudo ln -sf /proc/self/fd /dev/fd
 curl -sSL https://rvm.io/mpapis.asc | gpg --import -
 \curl -s -S -L https://get.rvm.io | bash -s stable
@@ -40,25 +40,26 @@ sudo chown discourse:discourse discourse -R
 cd discourse
 bundle install --deployment --without test
 cp /tmp/dontdockmebro/startup.sh /var/www/discourse/startup.sh
-cd /var/www/discourse/config
-cp discourse_quickstart.conf discourse.conf
-read -p "Please Configure discourse.conf File "
-sed -i "/^smtp_address/ s/$/ smtp.mandrillapp.com /" discourse.conf
-sed -i 's/25/587/g' discourse.conf
-read -p "Enter the name of your domain [ex: www.webeindustry.com] " domain
-sed -i "s/"discourse.example.com"/$domain/g" discourse.conf
-read -p "Enter your MandrillApp Username [ex: admin@webeindustry.com] " uname
-sed -i "/^smtp_user_name/ s/$/ $uname/g" discourse.conf
-read -p "Enter your MandrillApp API Key [ex: ytCARGJVKfLJs3x6MQZqw] " API
-sed -i "/^smtp_password/ s/$/ $API/g" discourse.conf
-read -p "Enter the email address you use to register your account [ex: mail@webeindustry.com] " mail
-sed -i "/^developer_email/ s/$/ $mail/g" discourse.conf
+EOF
+cd /var/www/discourse/config;
+sudo cp discourse_quickstart.conf discourse.conf;
+sed -i "/^smtp_address/ s/$/ smtp.mandrillapp.com /" discourse.conf;
+sed -i 's/25/587/g' discourse.conf;
+read -p "Enter the name of your domain [ex: www.webeindustry.com] " domain;
+sed -i "s/"discourse.example.com"/$domain/g" discourse.conf;
+read -p "Enter your MandrillApp Username [ex: admin@webeindustry.com] " uname;
+sed -i "/^smtp_user_name/ s/$/ $uname/g" discourse.conf;
+read -p "Enter your MandrillApp API Key [ex: ytCARGJVKfLJs3x6MQZqw] " API;
+sed -i "/^smtp_password/ s/$/ $API/g" discourse.conf;
+read -p "Enter the email address you use to register your account [ex: mail@webeindustry.com] " mail;
+sed -i "/^developer_email/ s/$/ $mail/g" discourse.conf;
+su discourse <<'EOF'
 cd /var/www/discourse
 createdb discourse_prod
 RUBY_GC_MALLOC_LIMIT=90000000 RAILS_ENV=production bundle exec rake db:migrate
 RUBY_GC_MALLOC_LIMIT=90000000 RAILS_ENV=production bundle exec rake assets:precompile
 mkdir /var/www/discourse/tmp/pids
-ABC
+EOF
 cd /var/www/discourse/config;
 cp unicorn_upstart.conf /etc/init/disc.conf;
 cp nginx.global.conf /etc/nginx/conf.d/local-server.conf;
