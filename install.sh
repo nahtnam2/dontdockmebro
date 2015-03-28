@@ -41,7 +41,9 @@ yes | sudo apt-get remove '^nginx.*$';
 cat << 'EOF' | sudo tee /etc/apt/sources.list.d/nginx.list
 deb http://nginx.org/packages/ubuntu/ trusty nginx
 deb-src http://nginx.org/packages/ubuntu/ trusty nginx
+
 EOF
+
 curl http://nginx.org/keys/nginx_signing.key | sudo apt-key add -;
 sudo apt-get update && sudo apt-get -y install nginx;
 cp /tmp/dontdockmebro/disco.conf /etc/nginx/conf.d/disco.conf;
@@ -49,9 +51,10 @@ sudo mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.disabled;
 mkdir /var/nginx;
 service nginx restart;
 sudo -u postgres createuser -s discourse;
-su discourse <<'EOF'
 
 #install rvm
+
+su discourse <<'EOF'
 
 sudo ln -sf /proc/self/fd /dev/fd
 curl -sSL https://rvm.io/mpapis.asc | gpg --import -
@@ -70,7 +73,9 @@ sudo chown discourse:discourse discourse -R
 cd discourse
 bundle install --deployment --without test
 cp /tmp/dontdockmebro/startup.sh /var/www/discourse/startup.sh
+
 EOF
+
 cd /var/www/discourse/config;
 sudo cp discourse_quickstart.conf discourse.conf;
 sed -i "/^smtp_address/ s/$/ smtp.mandrillapp.com /" discourse.conf;
@@ -83,16 +88,19 @@ read -p "Enter your MandrillApp API Key [ex: ytCARGJVKfLJs3x6MQZqw] " API;
 sed -i "/^smtp_password/ s/$/ $API/g" discourse.conf;
 read -p "Enter the email address you use to register your account [ex: mail@webeindustry.com] " mail;
 sed -i "/^developer_email/ s/$/ $mail/g" discourse.conf;
-su discourse <<'EOF'
 
 #init data
+
+su discourse <<'EOF'
 
 cd /var/www/discourse
 createdb discourse_prod
 RUBY_GC_MALLOC_LIMIT=90000000 RAILS_ENV=production bundle exec rake db:migrate
 RUBY_GC_MALLOC_LIMIT=90000000 RAILS_ENV=production bundle exec rake assets:precompile
 mkdir /var/www/discourse/tmp/pids
+
 EOF
+
 cd /var/www/discourse/config;
 cp unicorn_upstart.conf /etc/init/disc.conf;
 cp nginx.global.conf /etc/nginx/conf.d/local-server.conf;
