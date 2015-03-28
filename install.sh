@@ -12,7 +12,7 @@ apt-get upgrade -y;
 
 #install dependencies
 
-apt-get install git ufw nano fail2ban imagemagick curl sudo postgresql-9.3 postgresql-contrib-9.3 build-essential libssl-dev libyaml-dev git libtool libxslt-dev libxml2-dev libpq-dev gawk -y;
+apt-get install git ufw redis-server nano fail2ban imagemagick curl sudo postgresql-9.3 postgresql-contrib-9.3 build-essential libssl-dev libyaml-dev git libtool libxslt-dev libxml2-dev libpq-dev gawk -y;
 
 
 #configure & start fail2ban
