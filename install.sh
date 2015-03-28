@@ -112,8 +112,8 @@ cd /var/www/discourse/config;
 sed -i '27iexport UNICORN_SIDEKIQS=1' unicorn_upstart.conf;
 cp unicorn_upstart.conf /etc/init/disc.conf;
 cp nginx.global.conf /etc/nginx/conf.d/local-server.conf;
-echo "Shutting Down to Finalize Installation";
 
 #reboot to clean up and auto-start
 
-sudo reboot;
+echo "Shutting Down to Finalize Installation";
+sudo reboot
