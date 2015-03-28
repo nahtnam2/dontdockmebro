@@ -5,6 +5,9 @@ sed -i '2ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty-updates main restri
 sed -i '3ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty-backports main restricted universe multiverse' /etc/apt/sources.list;
 sed -i '4ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty-security main restricted universe multiverse' /etc/apt/sources.list;
 
+cd /tmp;
+
+
 #update and upgrade
 
 apt-get update;
@@ -12,7 +15,7 @@ apt-get upgrade -y;
 
 #install dependencies
 
-apt-get install nano fail2ban imagemagick redis-server curl sudo postgresql-9.3 postgresql-contrib-9.3 build-essential libssl-dev libyaml-dev git libtool libxslt-dev libxml2-dev libpq-dev gawk -y ;
+apt-get install git nano fail2ban imagemagick redis-server curl sudo postgresql-9.3 postgresql-contrib-9.3 build-essential libssl-dev libyaml-dev git libtool libxslt-dev libxml2-dev libpq-dev gawk -y;
 
 #configure fail2ban
 
@@ -34,6 +37,10 @@ sed -i '/ALL=(ALL:ALL) ALL/adiscourse    ALL=(ALL:ALL) ALL' /etc/sudoers;
 read -p "Enter a Password for the Discourse User " psss;
 yes "$psss" | sudo adduser --shell /bin/bash --gecos 'Discourse application' discourse;
 sudo install -d -m 755 -o discourse -g discourse /var/www/discourse;
+
+#get dontdockmebro
+
+git clone https://github.com/pl3bs/dontdockmebro.git
 
 #get latest nginx
 
