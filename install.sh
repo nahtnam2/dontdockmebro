@@ -42,7 +42,7 @@ cd discourse
 bundle install --deployment --without test
 cd /var/www/discourse/config
 cp /tmp/dontdockmebro/startup.sh /var/www/discourse/startup.sh
-cd /var/www/discourse/config
+cp discourse_quickstart.conf discourse.conf
 sed -i "/^smtp_address/ s/$/ smtp.mandrillapp.com /" discourse.conf
 sed -i 's/25/587/g' discourse.conf
 read -p "Enter the name of your domain [ex: www.webeindustry.com] " domain
