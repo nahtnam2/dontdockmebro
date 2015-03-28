@@ -1,16 +1,14 @@
-#!/bin/bash
-
-#update and upgrade
-
-apt-get update;
-apt-get upgrade -y;
-
 #Load closest mirrors
 
 sed -i '1ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty main restricted universe multiverse' /etc/apt/sources.list;
 sed -i '2ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty-updates main restricted universe multiverse' /etc/apt/sources.list;
 sed -i '3ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty-backports main restricted universe multiverse' /etc/apt/sources.list;
 sed -i '4ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty-security main restricted universe multiverse' /etc/apt/sources.list;
+
+#update and upgrade
+
+apt-get update;
+apt-get upgrade -y;
 
 #install dependencies
 
