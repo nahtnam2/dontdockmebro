@@ -2,8 +2,7 @@
 ###no sites or you'll fubar your instance#
 -Fresh Ubuntu 14.04 Install
 -1gb ram (2gb recommended)
-
-
+#Instructions
   
 1 Start the script with these commands. Copy paste the below:
 
