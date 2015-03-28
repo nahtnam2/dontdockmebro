@@ -65,7 +65,7 @@ sudo -u postgres createuser -s discourse;
 
 su discourse <<'EOF'
 
-sudo ln -sf /proc/self/fd /dev/fd
+yes "$psss" | sudo ln -sf /proc/self/fd /dev/fd
 curl -sSL https://rvm.io/mpapis.asc | gpg --import -
 \curl -s -S -L https://get.rvm.io | bash -s stable
 . ~/.rvm/scripts/rvm
