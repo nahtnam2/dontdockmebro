@@ -7,7 +7,7 @@ apt-get upgrade -y;
 apt-get install nano fail2ban redis-server curl sudo postgresql-9.3 postgresql-contrib-9.3 build-essential libssl-dev libyaml-dev git libtool libxslt-dev libxml2-dev libpq-dev gawk -y ;
 cd /etc/fail2ban;
 cp jail.conf jail.local;
-service fail2ban start;
+service fail2ban start; service redis-server start;
 sed -i '11i@reboot root bash /var/www/discourse/startup.sh' /etc/crontab;
 sed -i '/ALL=(ALL:ALL) ALL/adiscourse    ALL=(ALL:ALL) ALL' /etc/sudoers;
 read -p "Enter a Password for the Discourse User " psss;
