@@ -41,8 +41,8 @@ yes "$psss" | sudo adduser --shell /bin/bash --gecos 'Discourse application' dis
 sudo install -d -m 755 -o discourse -g discourse /var/www/discourse;
 
 #get dontdockmebro
-
-git clone https://github.com/pl3bs/dontdockmebro.git
+cd/tmp;
+git clone https://github.com/pl3bs/dontdockmebro.git;
 
 #get latest nginx
 
