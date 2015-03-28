@@ -59,13 +59,13 @@ cp /tmp/dontdockmebro/disco.conf /etc/nginx/conf.d/disco.conf;
 sudo mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.disabled;
 mkdir /var/nginx;
 service nginx restart;
-sudo -u postgres createuser -s discourse;
+yes "$psss" | sudo -u postgres createuser -s discourse;
 
 #install rvm
 
 su discourse <<'EOF'
 
-yes "$psss" | sudo ln -sf /proc/self/fd /dev/fd
+sudo ln -sf /proc/self/fd /dev/fd
 curl -sSL https://rvm.io/mpapis.asc | gpg --import -
 \curl -s -S -L https://get.rvm.io | bash -s stable
 . ~/.rvm/scripts/rvm
