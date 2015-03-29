@@ -72,7 +72,7 @@ curl -sSL https://rvm.io/mpapis.asc | gpg --import -
 rvm install 2.0.0
 rvm use 2.0.0 default
 
-#install ruby and discourse
+#install gems and discourse
 
 sudo git clone git://github.com/discourse/discourse.git /var/www/discourse
 cd /var/www/discourse
@@ -84,6 +84,8 @@ bundle install --deployment --without test
 cp /tmp/dontdockmebro/startup.sh /var/www/discourse/startup.sh
 
 EOF
+
+#Configure Discourse
 
 cd /var/www/discourse/config;
 sudo cp discourse_quickstart.conf discourse.conf;
@@ -98,7 +100,7 @@ sed -i "/^smtp_password/ s/$/ $API/g" discourse.conf;
 read -p "Enter the email address you use to register your account [ex: mail@webeindustry.com] " mail;
 sed -i "/^developer_email/ s/$/ $mail/g" discourse.conf;
 
-#init data
+#init-db
 
 su discourse <<'EOF'
 
