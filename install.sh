@@ -97,7 +97,7 @@ read -p "Enter your MandrillApp Username [ex: admin@mandrillapp.com] " uname;
 sed -i "/^smtp_user_name/ s/$/ $uname/g" discourse.conf;
 read -p "Enter your MandrillApp API Key [ex: ytCARGJVKfLJs3x6MQZqw] " API;
 sed -i "/^smtp_password/ s/$/ $API/g" discourse.conf;
-read -p "Enter the email address you use to register your account [ex: mail@webeindustry.com] " mail;
+read -p "Enter the email address you use to register your account [ex: webeindustry@gmail.com] " mail;
 sed -i "/^developer_email/ s/$/ $mail/g" discourse.conf;
 
 #init-db
