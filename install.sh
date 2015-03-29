@@ -53,7 +53,6 @@ deb-src http://nginx.org/packages/ubuntu/ trusty nginx
 
 EOF
 
-sudo ln -sf /proc/self/fd /dev/fd
 curl http://nginx.org/keys/nginx_signing.key | sudo apt-key add -;
 sudo apt-get update && sudo apt-get -y install nginx;
 cp /tmp/dontdockmebro/disco.conf /etc/nginx/conf.d/disco.conf;
@@ -66,6 +65,7 @@ sudo -u postgres createuser -s discourse;
 
 su discourse <<'EOF'
 
+sudo ln -sf /proc/self/fd /dev/fd
 curl -sSL https://rvm.io/mpapis.asc | gpg --import -
 \curl -s -S -L https://get.rvm.io | bash -s stable
 . ~/.rvm/scripts/rvm
