@@ -93,6 +93,7 @@ sed -i "/^smtp_address/ s/$/ smtp.mandrillapp.com /" discourse.conf;
 sed -i 's/25/587/g' discourse.conf;
 read -p "Enter the name of your domain [ex: www.webeindustry.com] " domain;
 sed -i "s/"discourse.example.com"/$domain/g" discourse.conf;
+#/etc/nginx/conf.d/disco.conf;
 read -p "Enter your MandrillApp Username [ex: admin@mandrillapp.com] " uname;
 sed -i "/^smtp_user_name/ s/$/ $uname/g" discourse.conf;
 read -p "Enter your MandrillApp API Key [ex: ytCARGJVKfLJs3x6MQZqw] " API;
