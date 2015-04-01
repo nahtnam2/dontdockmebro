@@ -30,7 +30,7 @@ service fail2ban start
 ufw allow http;
 ufw allow https;
 ufw allow ssh;
-yes y | ufw enable;
+yes | ufw enable;
 
 #update crontab for discourse auto-start
 
