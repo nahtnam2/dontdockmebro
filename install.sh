@@ -40,7 +40,7 @@ sed -i '11i@reboot root bash /var/www/discourse/startup.sh' /etc/crontab;
 
 sed -i '/ALL=(ALL:ALL) ALL/adiscourse    ALL=(ALL:ALL) ALL' /etc/sudoers;
 
-yes y "$psss" | sudo adduser --shell /bin/bash --gecos 'Discourse application' discourse;
+yes "$psss" | sudo adduser --shell /bin/bash --gecos 'Discourse application' discourse;
 sudo install -d -m 755 -o discourse -g discourse /var/www/discourse;
 
 #get dontdockmebro
