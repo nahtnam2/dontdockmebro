@@ -121,7 +121,15 @@ sed -i '27iexport UNICORN_SIDEKIQS=1' unicorn_upstart.conf;
 cp unicorn_upstart.conf /etc/init/disc.conf;
 cp nginx.global.conf /etc/nginx/conf.d/local-server.conf;
 
-#reboot to clean up and auto-start
+while [[ "$(read -p "Install Wordpress Now? [Y/n] " q;echo $q)" != "n" ]] ; do
 
+        cd /tmp
+        wget https://raw.githubusercontent.com/pl3bs/autowp/testing/disc_autowp.sh;
+        chmod +x disc_autowp.sh;
+        ./disc_autowp.sh;
+done
+
+
+#reboot to clean up and auto-start
 echo "Shutting Down to Finalize Installation";
 sudo reboot
