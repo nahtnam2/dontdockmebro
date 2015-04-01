@@ -30,7 +30,7 @@ service fail2ban start
 ufw allow http;
 ufw allow https;
 ufw allow ssh;
-yes | ufw enable;
+yes y | ufw enable;
 
 #update crontab for discourse auto-start
 
@@ -40,7 +40,7 @@ sed -i '11i@reboot root bash /var/www/discourse/startup.sh' /etc/crontab;
 
 sed -i '/ALL=(ALL:ALL) ALL/adiscourse    ALL=(ALL:ALL) ALL' /etc/sudoers;
 
-yes "$psss" | sudo adduser --shell /bin/bash --gecos 'Discourse application' discourse;
+yes y "$psss" | sudo adduser --shell /bin/bash --gecos 'Discourse application' discourse;
 sudo install -d -m 755 -o discourse -g discourse /var/www/discourse;
 
 #get dontdockmebro
@@ -49,7 +49,7 @@ git clone https://github.com/pl3bs/dontdockmebro.git;
 
 #get latest nginx
 
-yes | sudo apt-get remove '^nginx.*$';
+yes y | sudo apt-get remove '^nginx.*$';
 cat << 'EOF' | sudo tee /etc/apt/sources.list.d/nginx.list
 deb http://nginx.org/packages/ubuntu/ trusty nginx
 deb-src http://nginx.org/packages/ubuntu/ trusty nginx
