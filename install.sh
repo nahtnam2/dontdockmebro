@@ -1,3 +1,7 @@
+#Assign Discourse User Password
+
+read -p "Enter a Password for the Discourse User " psss;
+
 #Load closest mirrors
 
 sed -i '1ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty main restricted universe multiverse' /etc/apt/sources.list;
@@ -36,7 +40,6 @@ sed -i '11i@reboot root bash /var/www/discourse/startup.sh' /etc/crontab;
 
 sed -i '/ALL=(ALL:ALL) ALL/adiscourse    ALL=(ALL:ALL) ALL' /etc/sudoers;
 
-read -p "Enter a Password for the Discourse User " psss;
 yes "$psss" | sudo adduser --shell /bin/bash --gecos 'Discourse application' discourse;
 sudo install -d -m 755 -o discourse -g discourse /var/www/discourse;
 
