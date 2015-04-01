@@ -123,7 +123,7 @@ cp nginx.global.conf /etc/nginx/conf.d/local-server.conf;
 
 while [[ "$(read -p "Install Wordpress Now? [Y/n] " q;echo $q)" != "n" ]] ; do
 
-        cd /tmp
+        cd /tmp;
         wget https://raw.githubusercontent.com/pl3bs/autowp/testing/disc_autowp.sh;
         chmod +x disc_autowp.sh;
         ./disc_autowp.sh;
