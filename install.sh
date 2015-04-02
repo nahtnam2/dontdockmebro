@@ -23,10 +23,10 @@ service fail2ban start
 
 #configure ufw
 
-#ufw allow http;
-#ufw allow https;
-#ufw allow ssh;
-#yes y | ufw enable;
+ufw allow http;
+ufw allow https;
+ufw allow ssh;
+yes y | ufw enable;
 
 #update crontab for discourse auto-start
 
@@ -36,9 +36,10 @@ sed -i '11i@reboot root bash /var/www/discourse/startup.sh' /etc/crontab;
 
 sed -i '/ALL=(ALL:ALL) ALL/adiscourse    ALL=(ALL:ALL) ALL' /etc/sudoers;
 
+read -p "Enter the name of your domain [ex: www.webeindustry.com] " domain;
 read -p "Enter a Password for the Discourse User " psss;
 yes "$psss" | sudo adduser --shell /bin/bash --gecos 'Discourse application' discourse;
-sudo install -d -m 755 -o discourse -g discourse /var/www/discourse;
+sudo install -d -m 755 -o discourse -g discourse /var/www/"$domain";
 
 #get dontdockmebro
 cd /tmp;
@@ -74,24 +75,23 @@ rvm use 2.0.0 default
 
 #install gems and discourse
 
-sudo git clone git://github.com/discourse/discourse.git /var/www/discourse
-cd /var/www/discourse
+sudo git clone git://github.com/discourse/discourse.git /var/www/"$domain"
+cd /var/www/"$domain"
 gem install bundler
 cd  /var/www
-sudo chown discourse:discourse discourse -R
-cd discourse
+sudo chown discourse:discourse "$domain" -R
+cd "$domain"
 bundle install --deployment --without test
-cp /tmp/dontdockmebro/startup.sh /var/www/discourse/startup.sh
+cp /tmp/dontdockmebro/startup.sh /var/www/"$domain"/startup.sh
 
 EOF
 
 #Configure Discourse
 
-cd /var/www/discourse/config;
+cd /var/www/"$domain"/config;
 sudo cp discourse_quickstart.conf discourse.conf;
 sed -i "/^smtp_address/ s/$/ smtp.mandrillapp.com /" discourse.conf;
 sed -i 's/25/587/g' discourse.conf;
-read -p "Enter the name of your domain [ex: www.webeindustry.com] " domain;
 sed -i "s/"discourse.example.com"/$domain/g" discourse.conf;
 sed -i "/^server_name _ / s/_ ;$/ $domain/g" /etc/nginx/conf.d/disco.conf;
 read -p "Enter your MandrillApp Username [ex: admin@mandrillapp.com] " uname;
@@ -105,18 +105,18 @@ sed -i "/^developer_email/ s/$/ $mail/g" discourse.conf;
 
 su discourse <<'EOF'
 
-cd /var/www/discourse
+cd /var/www/"$domain"
 createdb discourse_prod
 /bin/bash --login
 RUBY_GC_MALLOC_LIMIT=90000000 RAILS_ENV=production bundle exec rake db:migrate
 RUBY_GC_MALLOC_LIMIT=90000000 RAILS_ENV=production bundle exec rake assets:precompile
-mkdir /var/www/discourse/tmp/pids
+mkdir /var/www/"$domain"/tmp/pids
 
 EOF
 
 #final config tweaks 
 
-cd /var/www/discourse/config;
+cd /var/www/"$domain"/config;
 sed -i '27iexport UNICORN_SIDEKIQS=1' unicorn_upstart.conf;
 cp unicorn_upstart.conf /etc/init/disc.conf;
 cp nginx.global.conf /etc/nginx/conf.d/local-server.conf;
