@@ -118,7 +118,9 @@ EOF
 
 cd /var/www/"$domain"/config;
 sed -i '27iexport UNICORN_SIDEKIQS=1' unicorn_upstart.conf;
-cp unicorn_upstart.conf /etc/init/disc.conf;
+sed -i '29d' unicorn_upstart.conf;
+sed -i '28i  cd /var/www/'$domain';
+cp unicorn_upstart.conf /etc/init/'$domain'.conf;
 cp nginx.global.conf /etc/nginx/conf.d/local-server.conf;
 
 #while [[ "$(read -p "Install Wordpress Now? [Y/n] " q;echo $q)" != "n" ]] ; do
