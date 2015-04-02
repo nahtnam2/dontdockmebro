@@ -1,44 +1,40 @@
 #Load closest mirrors
 
-sed -i '1ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty main restricted universe multiverse' /etc/apt/sources.list;
-sed -i '2ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty-updates main restricted universe multiverse' /etc/apt/sources.list;
-sed -i '3ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty-backports main restricted universe multiverse' /etc/apt/sources.list;
-sed -i '4ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty-security main restricted universe multiverse' /etc/apt/sources.list;
+#sed -i '1ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty main restricted universe multiverse' /etc/apt/sources.list;
+#sed -i '2ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty-updates main restricted universe multiverse' /etc/apt/sources.list;
+#sed -i '3ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty-backports main restricted universe multiverse' /etc/apt/sources.list;
+#sed -i '4ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty-security main restricted universe multiverse' /etc/apt/sources.list;
 
 #update and upgrade
 
-apt-get update;
-apt-get upgrade -y;
+#apt-get update;
+#apt-get upgrade -y;
 
 #install dependencies
 
-apt-get install git ufw redis-server nano fail2ban imagemagick curl sudo postgresql-9.3 postgresql-contrib-9.3 build-essential libssl-dev libyaml-dev git libtool libxslt-dev libxml2-dev libpq-dev gawk -y;
+#apt-get install git ufw redis-server nano fail2ban imagemagick curl sudo postgresql-9.3 postgresql-contrib-9.3 build-essential libssl-dev libyaml-dev git libtool libxslt-dev libxml2-dev libpq-dev gawk -y;
 
 
 #configure & start fail2ban
 
-cd /etc/fail2ban;
-cp jail.conf jail.local;
-service fail2ban start
-
+#cd /etc/fail2ban;
+#cp jail.conf jail.local;
+#service fail2ban start
+#
 #configure ufw
 
-ufw allow http;
-ufw allow https;
-ufw allow ssh;
-yes y | ufw enable;
-
-#update crontab for discourse auto-start
-
-sed -i '11i@reboot root bash /var/www/discourse/startup.sh' /etc/crontab;
+#ufw allow http;
+#ufw allow https;
+#ufw allow ssh;
+#yes y | ufw enable;
 
 #make discourse sudoer
 
-sed -i '/ALL=(ALL:ALL) ALL/adiscourse    ALL=(ALL:ALL) ALL' /etc/sudoers;
+#sed -i '/ALL=(ALL:ALL) ALL/adiscourse    ALL=(ALL:ALL) ALL' /etc/sudoers;
 
 read -p "Enter the name of your domain [ex: www.webeindustry.com] " domain;
-read -p "Enter a Password for the Discourse User " psss;
-yes "$psss" | sudo adduser --shell /bin/bash --gecos 'Discourse application' discourse;
+#read -p "Enter a Password for the Discourse User " psss;
+#yes "$psss" | sudo adduser --shell /bin/bash --gecos 'Discourse application' discourse;
 sudo install -d -m 755 -o discourse -g discourse /var/www/"$domain";
 
 #get dontdockmebro
@@ -47,31 +43,31 @@ git clone https://github.com/pl3bs/dontdockmebro.git;
 
 #get latest nginx
 
-yes | sudo apt-get remove '^nginx.*$';
-cat << 'EOF' | sudo tee /etc/apt/sources.list.d/nginx.list
-deb http://nginx.org/packages/ubuntu/ trusty nginx
-deb-src http://nginx.org/packages/ubuntu/ trusty nginx
+#yes | sudo apt-get remove '^nginx.*$';
+#cat << 'EOF' | sudo tee /etc/apt/sources.list.d/nginx.list
+#deb http://nginx.org/packages/ubuntu/ trusty nginx
+#deb-src http://nginx.org/packages/ubuntu/ trusty nginx
 
-EOF
+#EOF
 
-curl http://nginx.org/keys/nginx_signing.key | sudo apt-key add -;
-sudo apt-get update && sudo apt-get -y install nginx;
-cp /tmp/dontdockmebro/disco.conf /etc/nginx/conf.d/disco.conf;
-sudo mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.disabled;
-mkdir /var/nginx;
-service nginx restart;
-sudo -u postgres createuser -s discourse;
+#curl http://nginx.org/keys/nginx_signing.key | sudo apt-key add -;
+#sudo apt-get update && sudo apt-get -y install nginx;
+#cp /tmp/dontdockmebro/disco.conf /etc/nginx/conf.d/disco.conf;
+#sudo mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.disabled;
+#mkdir /var/nginx;
+#service nginx restart;
+#sudo -u postgres createuser -s discourse;
 
 #install rvm
 
 su discourse <<'EOF'
-
-sudo ln -sf /proc/self/fd /dev/fd
-curl -sSL https://rvm.io/mpapis.asc | gpg --import -
-\curl -s -S -L https://get.rvm.io | bash -s stable
+/bin/bash --login
+#sudo ln -sf /proc/self/fd /dev/fd
+#curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+#\curl -s -S -L https://get.rvm.io | bash -s stable
 . ~/.rvm/scripts/rvm
-rvm install 2.0.0
-rvm use 2.0.0 default
+#rvm install 2.0.0
+#rvm use 2.0.0 default
 
 #install gems and discourse
 
