@@ -106,7 +106,7 @@ sed -i "/^developer_email/ s/$/ $mail/g" discourse.conf;
 su discourse <<'EOF'
 
 cd /var/www/discourse
-createdb discourse_prod
+createdb discourse
 /bin/bash --login
 RUBY_GC_MALLOC_LIMIT=90000000 RAILS_ENV=production bundle exec rake db:migrate
 RUBY_GC_MALLOC_LIMIT=90000000 RAILS_ENV=production bundle exec rake assets:precompile
