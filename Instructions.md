@@ -2,7 +2,7 @@
   
 1 Start the script with these commands. Copy paste the below:
 
-cd /tmp; wget https://github.com/pl3bs/dontdockmebro/edit/master/install.sh; chmod +x install.sh; ./install.sh
+cd /tmp; wget https://raw.githubusercontent.com/pl3bs/dontdockmebro/master/install.sh; chmod +x install.sh; ./install.sh
 
 2 Enter a unique password for the discourse user.
 
