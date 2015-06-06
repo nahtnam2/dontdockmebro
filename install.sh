@@ -74,7 +74,7 @@ rvm use 2.0.0 default
 
 #install gems and discourse
 
-sudo git clone https://github.com/discourse/discourse.git -b tests-passed --single-branch /var/www/discourse
+sudo git clone https://github.com/discourse/discourse.git -b stable --single-branch /var/www/discourse
 cd /var/www/discourse
 gem install bundler
 cd  /var/www
