@@ -60,7 +60,15 @@ sudo chown discourse:discourse discourse -R
 cd discourse
 bundle install
 redis-server
-bundle exec rake db:create db:migrate db:test:prepare
-bundle exec rails server
+exit
+
 EOF
 
+su discourse <<'EOF'
+
+. ~/.rvm/scripts/rvm
+cd /var/www/discourse
+bundle exec rake db:create db:migrate db:test:prepare
+bundle exec rails server
+
+EOF
