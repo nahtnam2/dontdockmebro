@@ -14,20 +14,6 @@ apt-get upgrade -y;
 
 apt-get install git ufw redis-server nano fail2ban imagemagick curl sudo postgresql-9.3 postgresql-contrib-9.3 build-essential libssl-dev libyaml-dev git libtool libxslt-dev libxml2-dev libpq-dev gawk -y;
 
-
-#configure & start fail2ban
-
-cd /etc/fail2ban;
-cp jail.conf jail.local;
-service fail2ban start
-
-#configure ufw
-
-ufw allow http;
-ufw allow https;
-ufw allow ssh;
-yes y | ufw enable;
-
 #make discourse sudoer
 
 sed -i '/ALL=(ALL:ALL) ALL/adiscourse    ALL=(ALL:ALL) ALL' /etc/sudoers;
