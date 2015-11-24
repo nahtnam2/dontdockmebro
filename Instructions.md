@@ -21,4 +21,13 @@ In putty go to ssh > tunnels section and add source port 3000 and destination 12
 
 go to localhost:3000 to visit discourse install
 
-** for mail support 
+** for mail support use mailcatcher
+
+ssh > tunnels port 1025 & 1080
+
+su discourse
+. ~/.rvm/scripts/rvm
+gem install mailcatcher
+mailcatcher
+
+localhost:1080
